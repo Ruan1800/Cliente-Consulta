@@ -1,46 +1,49 @@
 package Cliente.ClienteConsulta.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
-import java.util.Date;
-import java.util.List;
+
 
 @Entity
+@Table(name = "Cliente")
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(nullable = false)
     private String nome;
-    private int cpf;
-    private int Cnpj;
-    private int rg;
-    private Date DataCadrasto;
-    private boolean ativo;
+
+    @Column(unique = true, nullable = false)
+    private String cpf;
+
+    @Column(unique = true)
+    private String cnpj;
+
+    @Column
+    private String rg;
 
 
-    public Cliente(long id, String nome, int cpf, int Cnpj, int rg, Date DataCadrasto, boolean ativo, List<Telefone> Telefones) {
-        this.id = id;
+    public Cliente() {
+
+    }
+
+    public Cliente(String nome, String cpf, String cnpj, String rg) {
         this.nome = nome;
         this.cpf = cpf;
-        this.Cnpj = Cnpj;
-        this. rg = rg;
-        this.ativo = ativo;
-        this.DataCadrasto = DataCadrasto;
-        this.Telefone = Telefones;
+        this.cnpj = cnpj;
+        this.rg = rg;
     }
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("cliente")
-    private List<Telefone> Telefone;
 
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,43 +55,28 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public int getCnpj() {
-        return Cnpj;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setCnpj(int cnpj) {
-        Cnpj = cnpj;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
-    public int getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(int rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
-
-    public Date getDataCadrasto() {
-        return DataCadrasto;
-    }
-
-    public void setDataCadrasto(Date dataCadrasto) {
-        DataCadrasto = dataCadrasto;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
 }
+
