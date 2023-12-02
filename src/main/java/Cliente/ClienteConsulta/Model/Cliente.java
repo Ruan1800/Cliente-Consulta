@@ -3,6 +3,7 @@ package Cliente.ClienteConsulta.Model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 
 
 @Entity
@@ -12,33 +13,23 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(nullable = false)
     private String nome;
-
-    @Column(unique = true, nullable = false)
     private String cpf;
-
-    @Column(unique = true)
     private String cnpj;
-
-    @Column
     private String rg;
+    private boolean ativo;
+    private LocalDate data;
 
-
-    public Cliente() {
-
-    }
-
-    public Cliente(String nome, String cpf, String cnpj, String rg) {
+    public Cliente(String nome, String cpf, String cnpj, String rg, boolean ativo, LocalDate data) {
         this.nome = nome;
         this.cpf = cpf;
         this.cnpj = cnpj;
         this.rg = rg;
+        this.ativo = ativo;
+        this.data = data;
     }
-
-
-
+    public Cliente() {
+    }
     public Long getId() {
         return id;
     }
